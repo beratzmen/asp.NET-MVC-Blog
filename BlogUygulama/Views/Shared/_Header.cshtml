@@ -1,0 +1,48 @@
+﻿ <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="/Home/Index/">Start Bootstrap</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Home/Index/">Ana Sayfa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Hakkımızda">Hakkımızda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Kategori/">Kategori</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Iletisim/">İletisim</a>
+                </li>
+                @if (Session["uyeid"] != null)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Uye/Index/@Session["uyeid"]">@Session["kullaniciadi"].ToString()</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Uye/Logout/">Çıkış</a>
+                    </li>
+                    if (Convert.ToInt32(Session["yetkiid"]) == 1)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Admin/Index/" target="_blank">Admin Paneli</a>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Uye/Login/">Giriş</a>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+</nav>

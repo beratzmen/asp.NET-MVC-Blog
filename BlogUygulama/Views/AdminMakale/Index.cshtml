@@ -1,0 +1,86 @@
+﻿@model IPagedList<BlogUygulama.Models.Makale>
+@using PagedList
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+
+                    <p>
+                        <hr />
+                        <h2>Makaleler</h2>
+                        @Html.ActionLink("Yeni Makale", "Create")
+                    </p>
+                </li>
+            </ol>
+            <div class="container">
+                <table class="table">
+                    <tr>
+                        <th>
+                           @Html.Label("KATEGORİ ADI")
+                        </th>
+                        <th>
+                            @Html.Label("BAŞLIK")
+                        </th>
+                       
+                        <th>
+                            @Html.Label("FOTO")
+                        </th>
+                        <th>
+                            @Html.Label("TARİH")
+                        </th>
+                        <th>
+                            @Html.Label("OKUNMA")
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Kategori.KategoriAdi)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Baslik)
+                            </td>
+                           
+                            <td>
+                                <img width="85" src="@item.Foto" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Tarih)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Okunma)
+                            </td>
+                            <td>
+
+
+                                @Html.ActionLink("Düzenle", "Edit", new { id = item.MakaleId }) |
+                                @Html.ActionLink("Detay", "Details", new { id = item.MakaleId }) |
+                                @Html.ActionLink("Sil", "Delete", new { id = item.MakaleId })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+                <div class="row">
+                    <div class="col-md-8 text-center">
+                        <div class="pagedList pagination">
+                            @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }), PagedListRenderOptions.Classic)
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+

@@ -1,0 +1,64 @@
+﻿@model BlogUygulama.Models.Makale
+
+@{
+    ViewBag.Title = "MakaleDetay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Header -->
+<header class="masthead" style="background-image:url('../../img/Write.jpg') ">
+
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h2><i>@Model.Baslik</i></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <p>
+                    @Html.Raw(Model.Icerik)
+
+                </p>
+                <script type="text/javascript">
+                    function image(img) {
+                        var src = img.src;
+                        window.open(src);
+                    }
+                </script>
+                <img src="@Model.Foto" height="350" size="350" alt="Johnson Pond" onclick="image(this)"><hr />
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+<script src="~/scripts/jquery.min.js"></script>
+<script src="~/scripts/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $.ajax({
+            url:'/Home/OkunmaArttir/',
+            data:{Makaleid:@Model.MakaleId},
+            type:'POST',
+        });
+    })
+</script>
+
+
+

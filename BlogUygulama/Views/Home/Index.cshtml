@@ -1,0 +1,86 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model  IPagedList<BlogUygulama.Models.Makale>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('../../img/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+
+                    <h1>Clean Blog</h1>
+                    <span class="subheading">BERAT ÖZMEN</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-preview">
+                @foreach (var item in Model)
+            {
+                    <a href="/Home/MakaleDetay/@item.MakaleId">
+                        <h2 class="post-title">
+                            @item.Baslik
+                        </h2>
+                        <h3 class="post-subtitle">
+
+                            @if (item.Icerik.Length > 50)
+                            {
+                                @Html.Raw(item.Icerik.Substring(0, 50))  @Html.Raw(" ... ")
+
+                            }
+                            else
+                            {
+                                <p>
+                                    @Html.Raw(item.Icerik)
+                                    
+                                </p>
+                            }
+
+                        </h3>
+                    </a>
+                    <img class="embed-responsive-item" src="@item.Foto" alt="@item.Baslik" />
+                    <p class="post-meta">
+
+                        Yazar :
+                        <a href="/Uye/Index/@item.Uye.UyeId">@item.Uye.KullaniciAdi</a>
+                        -
+                        @String.Format("{0:dd MMMM yyyy}", item.Tarih)
+
+                        @*<span class="table-dark">@item.Etikets.Count()</span>*@
+                    </p>
+                    <hr>
+                }
+                <br />
+                <div class="pager">
+                    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+         Pager 
+        <div class="clearfix">
+                <a class="btn btn-primary float-right" href="#">Sonraki Sayfa &rarr;</a>
+            </div>
+
+
+    </div>
+</div>
+
+<hr>
